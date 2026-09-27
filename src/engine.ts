@@ -24,11 +24,11 @@ const DECAY_RATES: Record<string, number> = {
 /** Advance every alert in the queue by one day. */
 export function advanceDay(alerts: Alert[]): void {
   for (const alert of alerts) {
-    advance(alert);
+    applyDailyChange(alert);
   }
 }
 
-function advance(alert: Alert): void {
+function applyDailyChange(alert: Alert): void {
   const strategy = SCORING_STRATEGIES[alert.kind];
   if (strategy !== undefined) {
     strategy.apply(alert);
